@@ -33,6 +33,24 @@ if (COMMAND pre_project_set_up_hermetic_build)
   pre_project_set_up_hermetic_build()
 endif()
 
+set(CMAKE_SYSTEM_NAME Linux)
+set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -s")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -s")
+
+set(cross_tool /opt/toolchain_v3_tx2_archive)
+set(CMAKE_SYSROOT "${cross_tool}/usr/aarch64-linux-gnu/libc")
+set(CROSSTOOL_ROOT "${cross_tool}/usr")
+set(CMAKE_C_COMPILER "${CROSSTOOL_ROOT}/bin/aarch64-linux-gnu-gcc")
+set(CMAKE_CXX_COMPILER "${CROSSTOOL_ROOT}/bin/aarch64-linux-gnu-g++")
+set(CMAKE_FIND_ROOT_PATH ${CMAKE_SYSROOT})
+set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
+set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libstdc++ -static-libgcc -std=c++14 -ldl -lpthread -DMGULK_LOG_STDERR=1 -Wall -Wextra -Wnon-virtual-dtor ")
+add_definitions(-D__ARM_64BIT_STATE=1)
+
 ########################################################################
 #
 # Project-wide settings
