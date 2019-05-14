@@ -17,7 +17,7 @@ option(
 
 option(gtest_build_tests "Build all of gtest's own tests." OFF)
 
-option(gtest_build_samples "Build gtest's sample programs." OFF)
+option(gtest_build_samples "Build gtest's sample programs." ON)
 
 option(gtest_disable_pthreads "Disable uses of pthreads in gtest." OFF)
 
@@ -86,7 +86,7 @@ if(CMAKE_PROJECT_NAME STREQUAL "gtest" OR CMAKE_PROJECT_NAME STREQUAL "googletes
 
   # BUILD_SHARED_LIBS is a standard CMake variable, but we declare it here to
   # make it prominent in the GUI.
-  option(BUILD_SHARED_LIBS "Build shared libraries (DLLs)." OFF)
+  option(BUILD_SHARED_LIBS "Build shared libraries (DLLs)." ON)
 
 else()
 
@@ -98,7 +98,6 @@ else()
     gtest_hide_internal_symbols)
 
 endif()
-
 
 if (gtest_hide_internal_symbols)
   set(CMAKE_CXX_VISIBILITY_PRESET hidden)
